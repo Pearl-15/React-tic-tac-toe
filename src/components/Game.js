@@ -1,7 +1,6 @@
 import React from 'react';
 import Board from './Board';
-import calculateWinner
- from './Utils';
+import calculateWinner from './Utils';
 class Game extends React.Component {
 
 
@@ -50,14 +49,19 @@ class Game extends React.Component {
         )
     }
 
+    handleNextRoundClick = ()=>{
+        console.log('NEXT Round is coming')
+    }
+
     render() {
 
         const history = this.state.history;
         const current = history[this.state.stepNumber];
+        const squares =  current.squares.slice();
    
         const moves = history.map((step,move)=>{
             const desc = move ? 'Go to move #' + move : 'Go to game start';
-            return(
+            return(              
                 <li key={move}>
                     <button onClick={() => this.jumpTo(move)}>{desc}</button>
                 </li>
@@ -83,6 +87,7 @@ class Game extends React.Component {
           <div className="game-info">
             <div>{status}</div>
             <ol>{moves}</ol>
+            {this.state.stepNumber === squares.length || calculateWinner(squares) ? <button onClick={this.handleNextRoundClick}>Next Round</button> : null}
           </div>
         </div>
       );
