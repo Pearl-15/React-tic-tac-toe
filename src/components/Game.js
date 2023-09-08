@@ -54,7 +54,33 @@ class Game extends React.Component {
         console.log('Next Round Start')
         e.preventDefault();
         this.props.addRound(this.state);
+        
 
+        const history = this.state.history;
+        const current = history[this.state.stepNumber];
+        const squares =  current.squares.slice();
+        const winner = calculateWinner(squares);
+
+        let isX;
+        if(winner){
+            isX = winner === 'X'? true : false
+        }else{
+            isX = this.state.xIsNext
+        }
+      
+        this.setState({
+            history:[{
+                squares: Array(9).fill(null),
+            }],
+            stepNumber: 0,
+            xIsNext: isX
+        })
+    }
+
+    handleEndGameClick = (e)=>{
+
+        e.preventDefault();
+        this.props.endGame();
         this.setState({
             history:[{
                 squares: Array(9).fill(null),
@@ -64,6 +90,7 @@ class Game extends React.Component {
         })
     }
 
+
     render() {
 
         const history = this.state.history;
@@ -71,7 +98,12 @@ class Game extends React.Component {
         const squares =  current.squares.slice();
    
         const moves = history.map((step,move)=>{
-            const desc = move ? 'Go to move #' + move : 'Go to game start';
+            // const desc = move ? 'Go to move #' + move : 'Go to game start';
+            
+            if(move === 0){
+                return null;
+            }
+            const desc = 'Go to move #'+ move ;
             return(              
                 <li key={move}>
                     <button onClick={() => this.jumpTo(move)}>{desc}</button>
@@ -98,7 +130,11 @@ class Game extends React.Component {
           <div className="game-info">
             <div>{status}</div>
             <ol>{moves}</ol>
-            {this.state.stepNumber === squares.length || calculateWinner(squares) ? <button onClick={this.handleNextRoundClick}>Next Round</button> : null}
+            {this.state.stepNumber === squares.length || calculateWinner(squares) ? 
+            (<>
+            <button onClick={this.handleNextRoundClick}>Next Round</button>
+            <button onClick={this.handleEndGameClick}>End Game</button>
+            </>)  : null}
           </div>
         </div>
       );
