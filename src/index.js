@@ -101,7 +101,7 @@ class Square extends React.Component {
             return;
         }
 
-        //if the squares[i] has not filled yet, filled it
+        //if the squares[i] has not filled yet, fill it
         squares[i] = this.state.xIsNext  ? 'X' : 'O';
         this.setState(
             {
@@ -117,7 +117,7 @@ class Square extends React.Component {
         this.setState(
             {
                 stepNumber: step,
-                xIsNext : (step % 2) == 0,
+                xIsNext : (step % 2) === 0,
             }
         )
     }
@@ -126,7 +126,6 @@ class Square extends React.Component {
 
         const history = this.state.history;
         const current = history[this.state.stepNumber];
-        const squares = current.squares.slice();
    
         const moves = history.map((step,move)=>{
             const desc = move ? 'Go to move #' + move : 'Go to game start';
