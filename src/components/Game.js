@@ -1,8 +1,9 @@
 import React from 'react';
 import Board from './Board';
 import calculateWinner from './Utils';
-class Game extends React.Component {
 
+
+class Game extends React.Component {
 
     //After adding time travel
     constructor(props){
@@ -49,8 +50,18 @@ class Game extends React.Component {
         )
     }
 
-    handleNextRoundClick = ()=>{
-        console.log('NEXT Round is coming')
+    handleNextRoundClick = (e)=>{
+        console.log('Next Round Start')
+        e.preventDefault();
+        this.props.addRound(this.state);
+
+        this.setState({
+            history:[{
+                squares: Array(9).fill(null),
+            }],
+            stepNumber: 0,
+            xIsNext: true,
+        })
     }
 
     render() {
