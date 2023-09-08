@@ -20,7 +20,7 @@ class GameTable extends React.Component{
         console.log('Next Round is activate')
     }
 
-
+    
 
 
     render() {
@@ -38,8 +38,8 @@ class GameTable extends React.Component{
                       history={game.history}
                       stepNumber={game.stepNumber}
                       xIsNext={game.xIsNext}
+                      roundNumber={index+1}
                     />
-                    <p>This is Round : {index + 1}</p>
                   </article>
                 );
               })}

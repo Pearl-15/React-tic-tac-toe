@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from './Board';
+import calculateWinner from './Utils';
 
 class RoundHistory extends React.Component{
 
@@ -9,15 +10,21 @@ class RoundHistory extends React.Component{
         const history = this.props.history;
         const winpattern = history[this.props.stepNumber]
         const squares =  winpattern.squares.slice();
-        console.log('LAST SQUARE' + squares);
+
+        const winner = calculateWinner(squares)
+        let status=""
+        if(winner){
+            status = "Winner: " + winner
+        }else{
+            status = "Draw"
+        }
 
         return(
             <div>
-                <h1>Winner : {this.props.xIsNext ? 'O' : 'X'} </h1>
-                <p>Round : </p>
-                <p>stepNumber={this.props.stepNumber}</p>
+                <h5>Round : {this.props.roundNumber} , {status}</h5>
                 <Board 
                 squares = {squares}
+                onClick = {() => {}}
                 />
             </div>
         )
