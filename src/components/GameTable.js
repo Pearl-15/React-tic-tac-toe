@@ -33,7 +33,9 @@ class GameTable extends React.Component{
               <Game addRound={this.addRound} endGame={this.endGame}/>
             </div>
             <div className="gamehistory">
+                
               {this.state.gameTable.map((game, index) => {
+                
                 return (
                   <article key={index}>
                     <RoundHistory
