@@ -14,6 +14,7 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
+            winner:''
         }
     }
 
@@ -73,7 +74,8 @@ class Game extends React.Component {
                 squares: Array(9).fill(null),
             }],
             stepNumber: 0,
-            xIsNext: isX
+            xIsNext: isX,
+            winner: winner
         })
     }
 
@@ -87,6 +89,7 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
+            winner:''
         })
     }
 

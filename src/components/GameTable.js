@@ -1,6 +1,6 @@
 import React from 'react';
 import Game from './Game';
-import RoundHistory from './RoundHistory';
+import GameHistory from './GameHistory';
 
 class GameTable extends React.Component{
 
@@ -38,11 +38,11 @@ class GameTable extends React.Component{
                 
                 return (
                   <article key={index}>
-                    <RoundHistory
+                    <GameHistory
                       id={index}
                       history={game.history}
                       stepNumber={game.stepNumber}
-                      xIsNext={game.xIsNext}
+                      winner={game.winner}
                       roundNumber={index+1}
                     />
                   </article>

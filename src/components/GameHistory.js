@@ -1,9 +1,8 @@
 import React from 'react';
 import Board from './Board';
-import calculateWinner from './Utils';
 
 
-class RoundHistory extends React.Component{
+class GameHistory extends React.Component{
 
     constructor(props){
         super(props);
@@ -28,10 +27,9 @@ class RoundHistory extends React.Component{
         const current = history[this.state.move] //pass this.state.move to reflect the square pattern
         const squares =  current.squares.slice();
 
-        const winner = calculateWinner(squares)
         let status=""
-        if(winner){
-            status = "Winner: " + winner
+        if(this.props.winner){
+            status = "Winner: " + this.props.winner
         }else{
             status = "Draw"
         }
@@ -58,4 +56,4 @@ class RoundHistory extends React.Component{
     }
 }
 
-export default RoundHistory;
+export default GameHistory;
