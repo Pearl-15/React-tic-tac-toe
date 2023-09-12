@@ -32,6 +32,12 @@ class Game extends React.Component {
 
         //if the squares[i] has not filled yet, fill it
         squares[i] = this.state.xIsNext  ? 'X' : 'O';
+
+    
+        let winner = calculateWinner(squares);
+        console.log("Winner " + winner)
+
+
         this.setState(
             {
                 history: history.concat([{
@@ -39,6 +45,8 @@ class Game extends React.Component {
                 }]),
                 stepNumber: history.length,
                 xIsNext: !this.state.xIsNext,
+                winner: winner
+
             });
     }
 
@@ -54,13 +62,14 @@ class Game extends React.Component {
     handleNextRoundClick = (e)=>{
         console.log('Next Round Start')
         e.preventDefault();
+
         this.props.addRound(this.state);
-        
 
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const squares =  current.squares.slice();
-        const winner = calculateWinner(squares);
+        let winner = calculateWinner(squares);
+        console.log("Winner " + winner)
 
         let isX;
         if(winner){
@@ -68,6 +77,7 @@ class Game extends React.Component {
         }else{
             isX = this.state.xIsNext
         }
+
       
         this.setState({
             history:[{
@@ -75,7 +85,7 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: isX,
-            winner: winner
+            winner: ''
         })
     }
 

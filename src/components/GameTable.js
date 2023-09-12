@@ -9,15 +9,16 @@ class GameTable extends React.Component{
         this.state = {
             gameTable:[]
         }
-        this.addRound = this.addRound.bind(this);
-        this.endGame = this.endGame.bind(this);
     }
+
+
 
     addRound = (game)=>{
         this.setState({
             gameTable:[...this.state.gameTable, game]
         });
         console.log('Next Round is activate')
+        console.log(this.state);
     }
 
     endGame = ()=>{

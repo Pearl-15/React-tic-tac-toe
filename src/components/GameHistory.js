@@ -27,6 +27,8 @@ class GameHistory extends React.Component{
         const current = history[this.state.move] //pass this.state.move to reflect the square pattern
         const squares =  current.squares.slice();
 
+        console.log("Winner from Game History" + this.props.winner)
+
         let status=""
         if(this.props.winner){
             status = "Winner: " + this.props.winner
