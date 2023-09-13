@@ -1,7 +1,7 @@
 import React from 'react';
 import Board from './Board';
 import calculateWinner from './Utils';
-
+import {v4 as uuidv4} from 'uuid';
 
 class Game extends React.Component {
 
@@ -112,13 +112,13 @@ class Game extends React.Component {
    
         const moves = history.map((step,move)=>{
             // const desc = move ? 'Go to move #' + move : 'Go to game start';
-            
+            const key = uuidv4();
             if(move === 0){
                 return null;
             }
             const desc = 'Go to move #'+ move ;
             return(              
-                <li key={move}>
+                <li key={key}>
                     <button onClick={() => this.jumpTo(move)}>{desc}</button>
                 </li>
             )

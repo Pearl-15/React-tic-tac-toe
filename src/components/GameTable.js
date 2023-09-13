@@ -1,6 +1,7 @@
 import React from 'react';
 import Game from './Game';
 import GameHistory from './GameHistory';
+import {v4 as uuidv4} from 'uuid';
 
 class GameTable extends React.Component{
 
@@ -36,9 +37,9 @@ class GameTable extends React.Component{
             <div className="gamehistory">
                 
               {this.state.gameTable.map((game, index) => {
-                
+                const key = uuidv4();
                 return (
-                  <article key={index}>
+                  <article key={key}>
                     <GameHistory
                       id={index}
                       history={game.history}

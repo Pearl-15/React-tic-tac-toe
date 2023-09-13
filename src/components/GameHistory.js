@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from './Board';
+import {v4 as uuidv4} from 'uuid';
 
 
 class GameHistory extends React.Component{
@@ -48,9 +49,11 @@ class GameHistory extends React.Component{
                 onClick = {() => {}}
                 />
              
-                {stepNumbersArray.map((move) => (
-                    <button key={move} onClick={() => this.handleClick(move)}>Go to move #{move}</button>
-                ))}
+                {stepNumbersArray.map((move) => {
+                    const key= uuidv4();
+        
+                    return(<button key={key} onClick={() => this.handleClick(move)}>Go to move #{move}</button>)
+                })}
              
                 
             </div>
