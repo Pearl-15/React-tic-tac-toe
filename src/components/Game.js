@@ -2,6 +2,7 @@ import React from 'react';
 import Board from './Board';
 import calculateWinner from './Utils';
 import {v4 as uuidv4} from 'uuid';
+// import Axios from 'axios';
 
 class Game extends React.Component {
 
@@ -35,7 +36,7 @@ class Game extends React.Component {
 
     
         let winner = calculateWinner(squares);
-        console.log("Winner " + winner)
+        // console.log("Winner " + winner)
 
 
         this.setState(
@@ -59,17 +60,14 @@ class Game extends React.Component {
         )
     }
 
-    handleNextRoundClick = (e)=>{
+    handleNextRoundClick = ()=>{
         console.log('Next Round Start')
-        e.preventDefault();
-
         this.props.addRound(this.state);
-
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const squares =  current.squares.slice();
         let winner = calculateWinner(squares);
-        console.log("Winner " + winner)
+        // console.log("Winner " + winner)
 
         let isX;
         if(winner){
@@ -92,7 +90,7 @@ class Game extends React.Component {
     handleEndGameClick = (e)=>{
 
         e.preventDefault();
-        this.props.endGame();
+        this.props.endGame(this.state);
         this.setState({
             history:[{
                 squares: Array(9).fill(null),
@@ -132,6 +130,7 @@ class Game extends React.Component {
         }else{
         status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
+    
 
       return (
         <div className="game">

@@ -9,3 +9,11 @@ width: 100%;
 flex: 1; 
 padding: 16px; 
 }
+
+
+/* button:focus,
+button:active {
+background-color: #007bff; 
+color: #fff;
+outline: none;
+} */

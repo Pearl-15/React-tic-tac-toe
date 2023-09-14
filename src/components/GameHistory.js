@@ -11,10 +11,9 @@ class GameHistory extends React.Component{
             //default is the last move (won pattern)
             move:this.props.stepNumber
         }
-        this.handleClick = this.handleClick.bind(this);
     }
     handleClick = (move)=>{
-        console.log(`button ${move} has been clicked `)
+        // console.log(`button ${move} has been clicked `)
         this.setState({
             move: move
         })
@@ -28,7 +27,7 @@ class GameHistory extends React.Component{
         const current = history[this.state.move] //pass this.state.move to reflect the square pattern
         const squares =  current.squares.slice();
 
-        console.log("Winner from Game History" + this.props.winner)
+        // console.log("Winner from Game History" + this.props.winner)
 
         let status=""
         if(this.props.winner){
@@ -38,24 +37,21 @@ class GameHistory extends React.Component{
         }
 
         // create button in to see the time travel, const stepNumbersArray = Array.from({ length: game.stepNumber }, (_, i) => i + 1);
-        console.log('history stepnumber' + this.props.stepNumber)
+        // console.log('history stepnumber' + this.props.stepNumber)
         const stepNumbersArray = Array.from({ length: this.props.stepNumber }, (_, i) => i + 1);
-        console.log("stepNumbersArray" + stepNumbersArray);
+        // console.log("stepNumbersArray" + stepNumbersArray);
         return(
             <div>
                 <h5>Round : {this.props.roundNumber} , {status}</h5>
                 <Board 
                 squares = {squares}
                 onClick = {() => {}}
-                />
-             
+                />           
                 {stepNumbersArray.map((move) => {
                     const key= uuidv4();
         
                     return(<button key={key} onClick={() => this.handleClick(move)}>Go to move #{move}</button>)
-                })}
-             
-                
+                })}                
             </div>
         )
     }
