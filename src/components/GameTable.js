@@ -13,7 +13,8 @@ class GameTable extends React.Component{
             gameTable:[],
             gameNumber:0,
             isPlay: true
-        }
+        };
+        this.abortController = new AbortController();
     }
 
 
@@ -76,24 +77,11 @@ class GameTable extends React.Component{
       })
     }
 
-  //   async componentDidMount(){
-  //     //call API to retrieve total game number,
-  //     try{
-  //         const response = await fetch("http://localhost:3000/games")
-  //         const data = await response.json();
-  //         console.log("Game Table ComponentDidMount")
-  //         console.log("Game Table Game Number" +  data.length);
-  //         this.setState({
-  //             gameNumber: data.length
-  //         })
-  //     }catch(err){
-  //         console.log(err);
-  //     }
-  // }
-
   componentDidMount() {
-    // Call API to retrieve total game number
-    fetch("http://localhost:3000/games")
+    // Call API to retrieve total game numbers that been played
+    fetch("http://localhost:3000/games",{
+      signal: this.abortController.signal,
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -101,8 +89,8 @@ class GameTable extends React.Component{
         return response.json();
       })
       .then((data) => {
-        console.log("Game Table ComponentDidMount");
-        console.log("Game Table Game Number" + data.length);
+        // console.log("Game Table ComponentDidMount");
+        // console.log("Game Table Game Number" + data.length);
         this.setState({
           gameNumber: data.length,
         });
@@ -111,11 +99,9 @@ class GameTable extends React.Component{
         console.error(error);
       });
   }
-  
 
-  componentDidUpdate(){
-    console.log("Game Table ComponentDidUpdate")
-    console.log(this.state);
+  componentWillUnmount() {
+    this.abortController.abort();
   }
 
     render() {
@@ -127,7 +113,6 @@ class GameTable extends React.Component{
              
             </div>
             <div className="gamehistory">
-              {/* <h5>Game Number : {this.state.gameNumber+1} </h5> */}
                 
               {this.state.gameTable.map((game, index) => {
                 const key = uuidv4();
@@ -144,7 +129,7 @@ class GameTable extends React.Component{
                 );
               })}
             </div>
-            <GameHistoryTable gameTable={this.state.gameTable} gameNumber={this.state.gameNumber} review={this.reviewGameHistory}/>
+            <GameHistoryTable gameNumber={this.state.gameNumber} review={this.reviewGameHistory}/>
           </div>
         );
       }

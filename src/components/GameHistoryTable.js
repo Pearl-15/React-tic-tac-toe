@@ -7,7 +7,6 @@ class GameHistoryTable extends React.Component{
         super(props);
         this.state={
             gameNumber: this.props.gameNumber,
-            gameTable: this.props.gameTable
         }
     }
 
@@ -16,70 +15,14 @@ class GameHistoryTable extends React.Component{
         this.props.review(gameId)
     }
 
-    //call API for the first render to display existing Game Number
-
-    // async componentDidMount(){
-    //     // console.log("Game History Table ComponentDidMount")
-
-    //     try{
-    //         const response = await fetch("http://localhost:3000/games")
-    //         const data = await response.json();
-    //         // console.log("Game History Table ComponentDidUpdate ")
-    //         // console.log(data.length);
-    //         this.setState({
-    //             gameNumber: data.length
-    //         })
-    //     }catch(err){
-    //         console.log(err);
-    //     }
-    // }
-
-    //////////////##### Still Checking need or not - Start ##########//////////////
-    // componentDidMount(){
-    //     // console.log("Game History Table ComponentDidMount")
-
-    //     fetch("http://localhost:3000/games")
-    //     .then((response) => {
-    //         if (!response.ok){
-    //             throw new Error("Network response was not ok")
-    //         }
-    //         return response.json();
-    //     })
-    //     .then((data)=>{
-    //         this.setState({
-    //             gameNumber: data.length
-    //         });
-    //     })
-    //     .catch((error)=>{
-    //         console.error(error);
-    //     })                 
-    // }
-    //////////////##### Still Checking need or not - End ##########//////////////
-
-    // //to update display Number of Games Played Button,
-    // //if Game Table has updated property, it will set back the lastest property and re render again 
-    // async componentDidUpdate(prevProps,prevState){
-      
-    //     if(this.props.gameNumber !== prevProps.gameNumber){
-
-    //         this.setState({
-    //             gameNumber: this.props.gameNumber,
-    //             gameTable: this.props.gameTable 
-    //         })
-
-    //     }
-       
-    // }
-
+    
     //to update display Number of Games Played Button,
     //if Game Table has updated property, it will set back the lastest property and re render again 
-    componentDidUpdate(prevProps,prevState){
+    componentDidUpdate(prevProps,prevState){    
       
         if(this.props.gameNumber !== prevProps.gameNumber){
-
             this.setState({
                 gameNumber: this.props.gameNumber,
-                gameTable: this.props.gameTable 
             })
 
         }
@@ -87,17 +30,14 @@ class GameHistoryTable extends React.Component{
     }
 
     render(){
-     
-        // console.log("Game History Render")
-        
-        const stepNumbersArray = Array.from({ length: this.state.gameNumber }, (_, i) => i + 1);
-   
-        // console.log('Game History step number' + stepNumbersArray.length)
+             
+        const gameNumbers = Array.from({ length: this.state.gameNumber }, (_, i) => i + 1);
+
         return(
         <div>
             <h5>Number of Games Played</h5>
            
-            {stepNumbersArray.map((i, index)=>{
+            {gameNumbers.map((i, index)=>{
                 const key = uuidv4();
                 return(
                     <ul key={key}>

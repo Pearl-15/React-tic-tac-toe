@@ -102,6 +102,7 @@ class Game extends React.Component {
     }
 
 
+
     render() {
 
         const history = this.state.history;

@@ -19,7 +19,6 @@ class GameHistory extends React.Component{
         })
 
     }
-
     
     render(){
 
@@ -45,7 +44,7 @@ class GameHistory extends React.Component{
                 <h5>Round : {this.props.roundNumber} , {status}</h5>
                 <Board 
                 squares = {squares}
-                onClick = {() => {}}
+                onClick = {() => {}} 
                 />           
                 {stepNumbersArray.map((move) => {
                     const key= uuidv4();
