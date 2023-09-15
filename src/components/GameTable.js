@@ -11,7 +11,7 @@ class GameTable extends React.Component{
         super(props);
         this.state = {
             gameTable:[],
-            gameNumber:0,
+            gameTables:[],
             isPlay: true
         };
         this.abortController = new AbortController();
@@ -29,27 +29,25 @@ class GameTable extends React.Component{
     }
 
     endGame = (game)=>{
-
-      const gameNo = (this.state.gameNumber) + 1
-      console.log("Game Number " + gameNo)
       console.log(this.state.gameTable)
 
       const lastGame =  [...this.state.gameTable, game];
       
       Axios.post("http://localhost:3000/games",{
             gameTable: lastGame,
-            gameNumber: gameNo
         })
         .then( res =>{
             console.log("End Game ")
             console.log("Response Data back from API")
             console.log(res.data)
+            this.setState((prevState)=>({
+              gameTable:[],
+              gameTables: [...prevState.gameTables,res.data]
+          }));
+
         })
 
-        this.setState({
-            gameTable:[],
-            gameNumber:gameNo
-        });
+       
     }
 
   
@@ -89,10 +87,8 @@ class GameTable extends React.Component{
         return response.json();
       })
       .then((data) => {
-        // console.log("Game Table ComponentDidMount");
-        // console.log("Game Table Game Number" + data.length);
         this.setState({
-          gameNumber: data.length,
+         gameTables: data
         });
       })
       .catch((error) => {
@@ -129,7 +125,7 @@ class GameTable extends React.Component{
                 );
               })}
             </div>
-            <GameHistoryTable gameNumber={this.state.gameNumber} review={this.reviewGameHistory}/>
+            <GameHistoryTable gameTables={this.state.gameTables} review={this.reviewGameHistory}/>
           </div>
         );
       }
